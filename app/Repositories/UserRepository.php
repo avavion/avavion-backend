@@ -24,7 +24,7 @@ class UserRepository implements UserRepositoryContract
                 email: $user->email,
                 password: $user->password,
                 role: $user->role,
-                emailVerifiedAt: $user->emailVerifiedAt
+                emailVerifiedAt: $user->email_verified_at
             );
         }
 
@@ -47,7 +47,7 @@ class UserRepository implements UserRepositoryContract
                 email: $user->email,
                 password: $user->password,
                 role: $user->role,
-                emailVerifiedAt: $user->emailVerifiedAt
+                emailVerifiedAt: $user->email_verified_at
             );
         }
 
@@ -72,7 +72,7 @@ class UserRepository implements UserRepositoryContract
             email: $user->email,
             password: $user->password,
             role: $user->role,
-            emailVerifiedAt: $user->emailVerifiedAt
+            emailVerifiedAt: $user->email_verified_at
         );
     }
 }
