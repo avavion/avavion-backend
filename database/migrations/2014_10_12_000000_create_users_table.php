@@ -19,11 +19,7 @@ return new class extends Migration {
             $table->string('password', 256);
             $table->timestamp('email_verified_at')->nullable();
 
-            $table->enum('role', [
-                UserRolesEnum::USER->value,
-                UserRolesEnum::ADMIN->value,
-                UserRolesEnum::BANNED->value,
-            ])->default(UserRolesEnum::USER->value);
+            $table->enum('role', UserRolesEnum::getRoleArrayValues())->default(UserRolesEnum::USER->value);
 
             $table->rememberToken();
 
