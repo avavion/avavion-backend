@@ -1,0 +1,39 @@
+version: "3.0"
+
+services:
+  php:
+    build: .
+    image: php:8.2-fpm
+    volumes:
+      - ./:/var/www/avavion-backend
+      - ./logs/laravel:/var/www/avavion-backend/storage/logs
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:1.25.1
+    volumes:
+      - ./:/var/www/avavion-backend
+      - ./docker/nginx/:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - app-network
+    links:
+      - php
+
+#  mysql:
+#    image: mysql:8.0.33
+#    tty: true
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_DATABASE: "avavion-backend"
+#      MYSQL_ROOT_PASSWORD: "avavionmvm"
+#    networks:
+#      - app-network
+
+networks:
+  app-network:
+    driver: bridge

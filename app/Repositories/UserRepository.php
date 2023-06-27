@@ -6,14 +6,14 @@ use App\Contracts\Repositories\UserRepositoryContract;
 use App\Dto\User\UserDto;
 use App\Models\User;
 
-class UserRepository implements UserRepositoryContract
+readonly class UserRepository implements UserRepositoryContract
 {
     /**
      * @return array<UserDto>
      */
     public function getAllUsers(): array
     {
-        $users = User::query()->get();
+        $users = User::query()->get;
 
         $mapped = [];
 
