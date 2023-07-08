@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ProjectSystemEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,8 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  * @property boolean $is_published
  * @property string $content
- * @property string $github_url
+ * @property string $url
  * @property integer $stars
+ * @property ProjectSystemEnum $system
+ * @property string $instanceId
  */
 class Project extends Model
 {
@@ -20,13 +23,17 @@ class Project extends Model
     protected $fillable = [
         'title',
         'is_published',
-        'github_url',
+        'url',
         'content',
-        'stars'
+        'stars',
+        'instance_id',
+        'system'
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
-        'stars' => 'integer'
+        'stars' => 'integer',
+        'instance_id' => 'string',
+        'system' => ProjectSystemEnum::class
     ];
 }

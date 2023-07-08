@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string $image_url
  * @property string $image_path
  * @property string $author_id
+ * @method static whereId(int $id)
  */
 class Article extends Model
 {
@@ -34,11 +36,17 @@ class Article extends Model
         'image_url' => 'string'
     ];
 
+    /**
+     * @return BelongsTo
+     */
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
+    /**
+     * @return Attribute
+     */
     public function imageUrl(): Attribute
     {
         return Attribute::make(

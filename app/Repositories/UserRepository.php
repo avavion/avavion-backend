@@ -13,7 +13,7 @@ readonly class UserRepository implements UserRepositoryContract
      */
     public function getAllUsers(): array
     {
-        $users = User::query()->get;
+        $users = User::query()->get();
 
         $mapped = [];
 
@@ -22,7 +22,6 @@ readonly class UserRepository implements UserRepositoryContract
                 id: $user->id,
                 username: $user->username,
                 email: $user->email,
-                password: $user->password,
                 role: $user->role,
                 emailVerifiedAt: $user->email_verified_at
             );
@@ -45,7 +44,6 @@ readonly class UserRepository implements UserRepositoryContract
                 id: $user->id,
                 username: $user->username,
                 email: $user->email,
-                password: $user->password,
                 role: $user->role,
                 emailVerifiedAt: $user->email_verified_at
             );
@@ -70,7 +68,6 @@ readonly class UserRepository implements UserRepositoryContract
             id: $user->id,
             username: $user->username,
             email: $user->email,
-            password: $user->password,
             role: $user->role,
             emailVerifiedAt: $user->email_verified_at
         );

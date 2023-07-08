@@ -18,13 +18,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $roles = [UserRolesEnum::USER->value, UserRolesEnum::ADMIN->value, UserRolesEnum::BANNED->value];
-
         return [
-            'email' => fake()->safeEmail,
-            'username' => fake()->safeEmailDomain(),
+            'email' => fake()->unique()->safeEmail,
+            'username' => fake()->unique()->userName,
             'password' => Hash::make('avavionmvm'),
-            'role' => array_rand($roles),
+            'role' => UserRolesEnum::USER,
             'email_verified_at' => fake()->boolean() ? fake()->dateTime() : null
         ];
     }

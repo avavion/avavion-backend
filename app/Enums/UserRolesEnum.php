@@ -2,20 +2,35 @@
 
 namespace App\Enums;
 
-enum UserRolesEnum: string
+enum UserRolesEnum: int
 {
-    case USER = 'user';
-    case ADMIN = 'admin';
-    case BANNED = 'banned';
+    case USER = 1;
+    case ADMIN = 2;
+    case BANNED = 3;
 
     /**
-     * @return array<string>
+     * @return array<int>
      */
     public static function getRoleArrayValues(): array
     {
         return [self::USER->value, self::ADMIN->value, self::BANNED->value];
     }
 
+    /**
+     * @return string
+     */
+    public function getValue(): string
+    {
+        return match ($this) {
+            self::USER => 'user',
+            self::ADMIN => 'admin',
+            self::BANNED => 'banned'
+        };
+    }
+
+    /**
+     * @return string
+     */
     public function getLabelRole(): string
     {
         return match ($this) {

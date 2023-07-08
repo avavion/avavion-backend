@@ -10,9 +10,8 @@ readonly class UserDto
         public string        $id,
         public string        $username,
         public string        $email,
-        public string        $password,
         public UserRolesEnum $role,
-        public string        $emailVerifiedAt
+        public ?string       $emailVerifiedAt
     )
     {
     }

@@ -21,4 +21,5 @@ readonly class UserService implements UserServiceContract
     {
         return $this->userRepository->getAllUsers();
     }
+
 }

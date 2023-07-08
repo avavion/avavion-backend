@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +12,15 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title');
+            $table->text('content')->nullable();
+            $table->string('url');
+            $table->boolean('is_published')->default(false);
+            $table->integer('stars')->default(0);
+            $table->string('system');
+            $table->string('instance_id');
+
             $table->timestamps();
         });
     }

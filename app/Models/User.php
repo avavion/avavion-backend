@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Dto\User\UserDto;
+use App\Enums\UserRolesEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +17,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $username
  * @property string $password
  * @property string $email_verified_at
- * @property string $role
+ * @property UserRolesEnum $role
  *
  * @method static Builder|User whereId($value)
  * @method static Builder|User whereEmail($value)
@@ -36,13 +38,23 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'role' => 'string'
+        'role' => UserRolesEnum::class
     ];
+
+    public function modelToDto(): UserDto
+    {
+        return new UserDto(
+            id: $this->id,
+            username: $this->username,
+            email: $this->email,
+            role: $this->role,
+            emailVerifiedAt: $this->email_verified_at
+        );
+    }
 }
