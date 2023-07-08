@@ -8,11 +8,31 @@ use App\Enums\ProjectSystemEnum;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
-class GitHubRepository implements GitHubRepositoryContract
+readonly class GitHubRepository implements GitHubRepositoryContract
 {
     public function getInstanceById(string $instanceId)
     {
-        // TODO: Implement getInstanceById() method.
+        $username = config('projects.github', 'avavion');
+
+        $client = Http::timeout(30);
+
+        $response = $client->get("https://api.github.com/users/{$username}/repos");
+
+        if (!$response->successful()) {
+            throw new BadRequestException();
+        }
+
+        $repository = $response->json();
+
+        return new ProjectSystemDto(
+            instanceId: $repository['id'],
+            title: $repository['full_name'],
+            url: $repository['html_url'],
+            system: ProjectSystemEnum::GITHUB,
+            stars: $repository['stargazers_count'],
+            content: $repository['description'] ?? null,
+            isPublished: true
+        );
     }
 
     /**

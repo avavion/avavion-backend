@@ -6,7 +6,7 @@ use App\Enums\ProjectSystemEnum;
 use App\Repositories\ProjectSystems\GitHub\GitHubRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
-class ProjectSystemFactory
+readonly class ProjectSystemFactory
 {
     /**
      * @throws BindingResolutionException

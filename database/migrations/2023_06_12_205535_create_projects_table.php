@@ -21,6 +21,8 @@ return new class extends Migration {
             $table->string('system');
             $table->string('instance_id');
 
+            $table->index(['instance_id', 'system']);
+
             $table->timestamps();
         });
     }

@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Contracts\Repositories\ProjectRepositoryContract;
 use App\Dto\Project\ProjectSystemDto;
 use App\Models\Project;
-use Illuminate\Support\Facades\DB;
 
-class ProjectRepository
+readonly class ProjectRepository implements ProjectRepositoryContract
 {
     /**
      * @param array<ProjectSystemDto> $repositories
@@ -15,14 +15,18 @@ class ProjectRepository
     public function createOrUpdate(array $repositories): void
     {
         foreach ($repositories as $repository) {
-            Project::query()->updateOrCreate([
-                'title' => $repository->title,
-                'system' => $repository->system,
-                'stars' => $repository->stars,
-                'instanceId' => $repository->instanceId,
-                'content' => $repository->content,
-                'url' => $repository->url,
-            ]);
+            Project::query()
+                ->updateOrCreate([
+                    'system' => $repository->system,
+                    'instance_id' => $repository->instanceId,
+                ], [
+                    'title' => $repository->title,
+                    'stars' => $repository->stars,
+                    'content' => $repository->content,
+                    'url' => $repository->url,
+                    'system' => $repository->system,
+                    'instance_id' => $repository->instanceId,
+                ]);
         }
     }
 }

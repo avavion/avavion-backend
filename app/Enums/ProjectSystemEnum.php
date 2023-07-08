@@ -15,6 +15,16 @@ enum ProjectSystemEnum: string
     }
 
     /**
+     * @return array<string>
+     */
+    public static function getAllSystemValues(): array
+    {
+        return [
+            self::GITHUB->value
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getSystemLabel(): string

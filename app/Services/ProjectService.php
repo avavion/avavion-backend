@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use App\Contracts\Repositories\ProjectRepositoryContract;
+use App\Contracts\Services\ProjectServiceContract;
 use App\Enums\ProjectSystemEnum;
 use App\Factories\ProjectSystemFactory;
-use App\Repositories\ProjectRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
-class ProjectService
+readonly class ProjectService implements ProjectServiceContract
 {
     public function __construct(
         private ProjectRepositoryContract $projectRepository
@@ -19,7 +19,7 @@ class ProjectService
     /**
      * @throws BindingResolutionException
      */
-    public function createOrUpdate(): void
+    public function createOrUpdateProjectWithSystem(): bool
     {
         $systems = ProjectSystemEnum::getAllSystems();
 
@@ -30,5 +30,7 @@ class ProjectService
 
             $this->projectRepository->createOrUpdate($repositories);
         }
+
+        return true;
     }
 }

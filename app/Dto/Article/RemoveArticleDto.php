@@ -4,7 +4,7 @@ namespace App\Dto\Article;
 
 use App\Dto\User\UserDto;
 
-class RemoveArticleDto
+readonly class RemoveArticleDto
 {
     public function __construct(
         public int     $id,

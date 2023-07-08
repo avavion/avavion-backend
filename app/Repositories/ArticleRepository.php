@@ -11,7 +11,7 @@ use App\Dto\Article\RemoveArticleDto;
 use App\Dto\Article\UpdateArticleDto;
 use App\Models\Article;
 
-class ArticleRepository implements ArticleRepositoryContract
+readonly class ArticleRepository implements ArticleRepositoryContract
 {
     /**
      * @param string $id

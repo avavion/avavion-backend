@@ -2,7 +2,7 @@
 
 namespace App\Dto\Article;
 
-class ArticlePaginationResponseDto
+readonly class ArticlePaginationResponseDto
 {
     /**
      * @param array<ArticleDto> $articles

@@ -2,7 +2,7 @@
 
 namespace App\Dto\Article;
 
-class ArticlePaginationDto
+readonly class ArticlePaginationDto
 {
     public function __construct(
         public int $page = 1,
