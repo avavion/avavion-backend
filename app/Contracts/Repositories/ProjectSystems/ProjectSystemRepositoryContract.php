@@ -9,7 +9,7 @@ interface ProjectSystemRepositoryContract
     /**
      * @param string $instanceId
      */
-    public function getInstanceById(string $instanceId);
+    public function getInstanceById(string $instanceId): ProjectSystemDto;
 
     /**
      * @return array<ProjectSystemDto>

@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum ProjectSystemEnum: string
 {
+    case ALL = 'all';
     case MANUAL = 'manual';
     case GITLAB = 'gitlab';
     case BITBUCKET = 'bitbucket';
@@ -26,7 +27,8 @@ enum ProjectSystemEnum: string
             self::GITHUB => 'GitHub',
             self::GITLAB => 'GitLab',
             self::BITBUCKET => 'Bitbucket',
-            self::MANUAL => 'avavion.ru'
+            self::MANUAL => 'avavion.ru',
+            self::ALL => 'All'
         };
     }
 }

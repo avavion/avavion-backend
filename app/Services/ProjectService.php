@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Contracts\Repositories\ProjectRepositoryContract;
 use App\Contracts\Services\ProjectServiceContract;
 use App\Dto\Project\GetFilteredProjectsDto;
+use App\Dto\Project\ProjectPaginationResponseDto;
 use App\Enums\ProjectSystemEnum;
 use App\Factories\ProjectSystemFactory;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -27,6 +28,8 @@ readonly class ProjectService implements ProjectServiceContract
         foreach ($systems as $system) {
             $systemRepository = ProjectSystemFactory::getRepository($system);
 
+            if (is_null($systemRepository)) continue;
+
             $repositories = $systemRepository->getAllInstances();
 
             $this->projectRepository->createOrUpdate($repositories);
@@ -35,7 +38,7 @@ readonly class ProjectService implements ProjectServiceContract
         return true;
     }
 
-    public function getFilteredProjects(GetFilteredProjectsDto $filter)
+    public function getFilteredProjects(GetFilteredProjectsDto $filter): ProjectPaginationResponseDto
     {
         return $this->projectRepository->getFilteredProjects($filter);
     }

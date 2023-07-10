@@ -24,8 +24,10 @@ class AggregateProjects extends Command
     /**
      * Execute the console command.
      */
-    public function handle(ProjectServiceContract $service): bool
+    public function handle(ProjectServiceContract $service): int
     {
-        return $service->createOrUpdateProjectWithSystem();
+        $service->createOrUpdateProjectWithSystem();
+
+        return true;
     }
 }

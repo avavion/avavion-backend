@@ -7,6 +7,7 @@ use App\Dto\Project\GetFilteredProjectsDto;
 use App\Enums\ProjectSystemEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\GetFilteredProjectsRequest;
+use App\Http\Resources\Project\PaginatedProjectResource;
 use Illuminate\Http\JsonResponse;
 
 class ProjectController extends Controller
@@ -21,10 +22,10 @@ class ProjectController extends Controller
     {
         $response = $this->service->getFilteredProjects(new GetFilteredProjectsDto(
             type: $request->enum('type', ProjectSystemEnum::class),
-            currentPage: $request->get('current_page', 1),
+            currentPage: $request->get('page', 1),
             perPage: $request->get('per_page', 25)
         ));
 
-        return $this->sendResponse($response);
+        return $this->sendResponse(new PaginatedProjectResource($response));
     }
 }

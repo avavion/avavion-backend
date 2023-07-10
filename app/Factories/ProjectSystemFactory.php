@@ -14,7 +14,8 @@ readonly class ProjectSystemFactory
     public static function getRepository(ProjectSystemEnum $system)
     {
         return match ($system) {
-            ProjectSystemEnum::GITHUB => app()->make(GitHubRepository::class)
+            ProjectSystemEnum::GITHUB => app()->make(GitHubRepository::class),
+            default => null
         };
     }
 }

@@ -5,12 +5,13 @@ namespace App\Repositories\ProjectSystems\GitHub;
 use App\Contracts\Repositories\ProjectSystems\GitHub\GitHubRepositoryContract;
 use App\Dto\Project\ProjectSystemDto;
 use App\Enums\ProjectSystemEnum;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 readonly class GitHubRepository implements GitHubRepositoryContract
 {
-    public function getInstanceById(string $instanceId)
+    public function getInstanceById(string $instanceId): ProjectSystemDto
     {
         $username = config('projects.github', 'avavion');
 
@@ -29,6 +30,7 @@ readonly class GitHubRepository implements GitHubRepositoryContract
             title: $repository['full_name'],
             url: $repository['html_url'],
             system: ProjectSystemEnum::GITHUB,
+            created: new Carbon($repository['created_at']),
             stars: $repository['stargazers_count'],
             content: $repository['description'] ?? null,
             isPublished: true
@@ -61,6 +63,7 @@ readonly class GitHubRepository implements GitHubRepositoryContract
                 title: $repository['full_name'],
                 url: $repository['html_url'],
                 system: ProjectSystemEnum::GITHUB,
+                created: new Carbon($repository['created_at']),
                 stars: $repository['stargazers_count'],
                 content: $repository['description'] ?? null,
                 isPublished: true,

@@ -27,7 +27,7 @@ class GetFilteredProjectsRequest extends FormRequest
         return [
             'per_page' => ['sometimes', 'integer', 'max:100'],
             'type' => ['required', Rule::enum(ProjectSystemEnum::class)],
-            'current_page' => ['sometimes', 'integer', 'min:1']
+            'page' => ['sometimes', 'integer', 'min:1']
         ];
     }
 }

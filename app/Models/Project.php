@@ -29,7 +29,8 @@ class Project extends Model
         'stars',
         'instance_id',
         'system',
-        'topics'
+        'topics',
+        'created'
     ];
 
     protected $casts = [
@@ -37,6 +38,7 @@ class Project extends Model
         'stars' => 'integer',
         'instance_id' => 'string',
         'system' => ProjectSystemEnum::class,
-        'topics' => 'array'
+        'topics' => 'array',
+        'created' => 'datetime'
     ];
 }

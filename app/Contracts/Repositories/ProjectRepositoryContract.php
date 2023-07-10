@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories;
 
 use App\Dto\Project\GetFilteredProjectsDto;
 use App\Dto\Project\ProjectDto;
+use App\Dto\Project\ProjectPaginationResponseDto;
 use App\Dto\Project\ProjectSystemDto;
 
 interface ProjectRepositoryContract
@@ -19,5 +20,5 @@ interface ProjectRepositoryContract
      */
     public function getAllPublishedProjects(): array;
 
-    public function getFilteredProjects(GetFilteredProjectsDto $filter);
+    public function getFilteredProjects(GetFilteredProjectsDto $filter): ProjectPaginationResponseDto;
 }

@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->json('topics')->nullable();
             $table->string('system');
             $table->string('instance_id')->nullable();
+            $table->timestamp('created')->useCurrent();
 
             $table->index(['instance_id', 'system']);
 
