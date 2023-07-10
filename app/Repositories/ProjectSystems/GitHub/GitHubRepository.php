@@ -63,7 +63,8 @@ readonly class GitHubRepository implements GitHubRepositoryContract
                 system: ProjectSystemEnum::GITHUB,
                 stars: $repository['stargazers_count'],
                 content: $repository['description'] ?? null,
-                isPublished: true
+                isPublished: true,
+                topics: $repository['topics']
             );
         }
 

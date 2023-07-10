@@ -13,7 +13,8 @@ readonly class ProjectSystemDto
         public ProjectSystemEnum $system,
         public int               $stars = 0,
         public ?string           $content = null,
-        public bool              $isPublished = true
+        public bool              $isPublished = true,
+        public array             $topics = []
     )
     {
     }

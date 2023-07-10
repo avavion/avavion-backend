@@ -14,7 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $url
  * @property integer $stars
  * @property ProjectSystemEnum $system
- * @property string $instanceId
+ * @property string $instance_id
+ * @property array $topics
  */
 class Project extends Model
 {
@@ -27,13 +28,15 @@ class Project extends Model
         'content',
         'stars',
         'instance_id',
-        'system'
+        'system',
+        'topics'
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
         'stars' => 'integer',
         'instance_id' => 'string',
-        'system' => ProjectSystemEnum::class
+        'system' => ProjectSystemEnum::class,
+        'topics' => 'array'
     ];
 }

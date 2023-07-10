@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\Repositories\ProjectRepositoryContract;
 use App\Contracts\Services\ProjectServiceContract;
+use App\Dto\Project\GetFilteredProjectsDto;
 use App\Enums\ProjectSystemEnum;
 use App\Factories\ProjectSystemFactory;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -32,5 +33,10 @@ readonly class ProjectService implements ProjectServiceContract
         }
 
         return true;
+    }
+
+    public function getFilteredProjects(GetFilteredProjectsDto $filter)
+    {
+        return $this->projectRepository->getFilteredProjects($filter);
     }
 }

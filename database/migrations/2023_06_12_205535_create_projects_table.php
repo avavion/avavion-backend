@@ -18,8 +18,9 @@ return new class extends Migration {
             $table->string('url');
             $table->boolean('is_published')->default(false);
             $table->integer('stars')->default(0);
+            $table->json('topics')->nullable();
             $table->string('system');
-            $table->string('instance_id');
+            $table->string('instance_id')->nullable();
 
             $table->index(['instance_id', 'system']);
 
