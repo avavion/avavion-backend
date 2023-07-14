@@ -60,6 +60,7 @@ readonly class ProjectRepository implements ProjectRepositoryContract
                 stars: $project->stars,
                 system: $project->system,
                 instanceId: $project->instance_id,
+                createdAt: $project->created,
                 topics: $project->topics
             );
         }
@@ -102,6 +103,7 @@ readonly class ProjectRepository implements ProjectRepositoryContract
                 stars: $project->stars,
                 system: $project->system,
                 instanceId: $project->instance_id,
+                createdAt: $project->created,
                 topics: $project->topics
             );
         }

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property ProjectSystemEnum $system
  * @property string $instance_id
  * @property array $topics
+ * @property string $created
  */
 class Project extends Model
 {

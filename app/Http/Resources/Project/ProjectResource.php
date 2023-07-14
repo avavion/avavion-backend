@@ -20,6 +20,7 @@ class ProjectResource extends JsonResource
             'stars' => $this->stars,
             'topics' => $this->topics,
             'system' => $this->system,
+            'created_at' => $this->createdAt
         ];
     }
 }
