@@ -26,4 +26,7 @@ Route::group([
 ], function () {
     Route::get('/get', 'getFilteredProjects')
         ->name('get');
+
+    Route::get('/get/{project:id}', 'getProjectById')
+        ->name('get.id');
 });

@@ -21,4 +21,6 @@ interface ProjectRepositoryContract
     public function getAllPublishedProjects(): array;
 
     public function getFilteredProjects(GetFilteredProjectsDto $filter): ProjectPaginationResponseDto;
+
+    public function getProjectById(int $id): ProjectDto;
 }

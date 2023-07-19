@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Contracts\Repositories\ProjectRepositoryContract;
 use App\Contracts\Services\ProjectServiceContract;
 use App\Dto\Project\GetFilteredProjectsDto;
+use App\Dto\Project\ProjectDto;
 use App\Dto\Project\ProjectPaginationResponseDto;
 use App\Enums\ProjectSystemEnum;
 use App\Factories\ProjectSystemFactory;
@@ -41,5 +42,10 @@ readonly class ProjectService implements ProjectServiceContract
     public function getFilteredProjects(GetFilteredProjectsDto $filter): ProjectPaginationResponseDto
     {
         return $this->projectRepository->getFilteredProjects($filter);
+    }
+
+    public function getProjectById(int $id): ProjectDto
+    {
+        return $this->projectRepository->getProjectById($id);
     }
 }

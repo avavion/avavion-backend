@@ -9,6 +9,7 @@ use App\Dto\Project\ProjectPaginationResponseDto;
 use App\Dto\Project\ProjectSystemDto;
 use App\Enums\ProjectSystemEnum;
 use App\Models\Project;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 readonly class ProjectRepository implements ProjectRepositoryContract
 {
@@ -117,6 +118,28 @@ readonly class ProjectRepository implements ProjectRepositoryContract
             items: $mapped,
             hasNextPage: $hasNextPage,
             currentPage: $filter->currentPage,
+        );
+    }
+
+    public function getProjectById(int $id): ProjectDto
+    {
+        $project = Project::query()->where('id', $id)->first();
+
+        if (is_null($project)) {
+            throw new NotFoundHttpException();
+        }
+
+        return new ProjectDto(
+            id: $project->id,
+            title: $project->title,
+            content: $project->content,
+            url: $project->url,
+            isPublished: $project->is_published,
+            stars: $project->stars,
+            system: $project->system,
+            instanceId: $project->instance_id,
+            createdAt: $project->created,
+            topics: $project->topics
         );
     }
 }

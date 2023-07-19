@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Console\Commands\AggregateProjects;
 use App\Enums\ProjectSystemEnum;
+use App\Models\Project;
 use Tests\TestCase;
 
 class ProjectsFeatureTest extends TestCase
@@ -43,5 +44,27 @@ class ProjectsFeatureTest extends TestCase
 
         $this->assertIsBool($responseJson['status']);
         $this->assertIsArray($responseJson['data']);
+    }
+
+    public function testGetProjectByIdSuccess(): void
+    {
+        $project = Project::factory()->create();
+
+        $response = $this->get(route('projects.get.id', $project->id));
+
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'instance_id',
+                'title',
+                'content',
+                'url',
+                'stars',
+                'topics',
+                'system'
+            ],
+            'status'
+        ]);
     }
 }

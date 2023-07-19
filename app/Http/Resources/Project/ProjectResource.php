@@ -18,7 +18,7 @@ class ProjectResource extends JsonResource
             'content' => $this->content,
             'url' => $this->url,
             'stars' => $this->stars,
-            'topics' => $this->topics,
+            'topics' => $this->topics ?? [],
             'system' => $this->system,
             'created_at' => $this->createdAt
         ];

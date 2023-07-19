@@ -16,7 +16,7 @@ readonly class ProjectDto
         public ProjectSystemEnum $system,
         public ?string           $instanceId,
         public string            $createdAt,
-        public array             $topics = []
+        public ?array            $topics = []
     )
     {
     }

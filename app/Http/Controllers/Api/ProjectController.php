@@ -8,6 +8,7 @@ use App\Enums\ProjectSystemEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\GetFilteredProjectsRequest;
 use App\Http\Resources\Project\PaginatedProjectResource;
+use App\Http\Resources\Project\ProjectResource;
 use Illuminate\Http\JsonResponse;
 
 class ProjectController extends Controller
@@ -28,4 +29,12 @@ class ProjectController extends Controller
 
         return $this->sendResponse(new PaginatedProjectResource($response));
     }
+
+    public function getProjectById(int $id)
+    {
+        $response = $this->service->getProjectById($id);
+
+        return $this->sendResponse(new ProjectResource($response));
+    }
 }
+
