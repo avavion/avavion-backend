@@ -19,7 +19,7 @@ readonly class UserService implements UserServiceContract
      */
     public function getAllUsers(): array
     {
-        return $this->userRepository->getAllUsers();
+        return $this->userRepository->getAll();
     }
 
 }

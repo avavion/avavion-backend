@@ -14,6 +14,8 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property integer $id
  * @property string $email
+ * @property string $last_name
+ * @property string $first_name
  * @property string $username
  * @property string $password
  * @property string $email_verified_at
@@ -30,6 +32,8 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
+        'first_name',
+        'last_name',
         'username',
         'email',
         'password',
@@ -51,6 +55,8 @@ class User extends Authenticatable
     {
         return new UserDto(
             id: $this->id,
+            firstName: $this->first_name,
+            lastName: $this->last_name,
             username: $this->username,
             email: $this->email,
             role: $this->role,
