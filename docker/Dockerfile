@@ -1,5 +1,10 @@
 FROM php:8.2-fpm
 
+ENV GROUP=developers
+ENV USER=avavion
+ENV UID=1000
+ENV GID=1000
+
 RUN apt-get update && apt-get install -y \
       apt-utils \
       libpq-dev \
@@ -13,6 +18,18 @@ RUN apt-get update && apt-get install -y \
       docker-php-ext-install zip && \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN groupdel $GROUP
+
+RUN addgroup --gid $GID $GROUP
+
+RUN adduser \
+    --disabled-password \
+    --home "$(pwd)" \
+    --no-create-home \
+    --uid $UID \
+    --gid $GID \
+    $USER
 
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
