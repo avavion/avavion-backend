@@ -51,6 +51,15 @@ class User extends Authenticatable
         'role' => UserRolesEnum::class
     ];
 
+    protected $appends = [
+        'full_name'
+    ];
+
+    public function getFullNameAttribute(): string
+    {
+        return $this->last_name . ' ' . $this->first_name;
+    }
+
     public function modelToDto(): UserDto
     {
         return new UserDto(

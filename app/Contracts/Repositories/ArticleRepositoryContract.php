@@ -17,13 +17,33 @@ interface ArticleRepositoryContract
      */
     public function getArticlesByAuthorId(string $id): array;
 
-    public function createArticle(CreateArticleDto $createArticleDto);
+    /**
+     * @param CreateArticleDto $createArticleDto
+     * @return ArticleDto
+     */
+    public function createArticle(CreateArticleDto $createArticleDto): ArticleDto;
 
-    public function updateArticle(UpdateArticleDto $updateArticleDto);
+    /**
+     * @param UpdateArticleDto $updateArticleDto
+     * @return int
+     */
+    public function updateArticle(UpdateArticleDto $updateArticleDto): int;
 
-    public function removeArticle(RemoveArticleDto $removeArticleDto);
+    /**
+     * @param RemoveArticleDto $removeArticleDto
+     * @return int
+     */
+    public function removeArticle(RemoveArticleDto $removeArticleDto): int;
 
+    /**
+     * @param int $id
+     * @return ArticleDto
+     */
     public function getArticleById(int $id): ArticleDto;
 
+    /**
+     * @param ArticlePaginationDto $articlePaginationDto
+     * @return ArticlePaginationResponseDto
+     */
     public function getArticlesWithPagination(ArticlePaginationDto $articlePaginationDto): ArticlePaginationResponseDto;
 }

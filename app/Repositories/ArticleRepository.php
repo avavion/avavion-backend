@@ -10,6 +10,8 @@ use App\Dto\Article\CreateArticleDto;
 use App\Dto\Article\RemoveArticleDto;
 use App\Dto\Article\UpdateArticleDto;
 use App\Models\Article;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 readonly class ArticleRepository implements ArticleRepositoryContract
 {
@@ -42,19 +44,58 @@ readonly class ArticleRepository implements ArticleRepositoryContract
         return $mapped;
     }
 
-    public function createArticle(CreateArticleDto $createArticleDto)
+    /**
+     * @param CreateArticleDto $createArticleDto
+     * @return ArticleDto
+     */
+    public function createArticle(CreateArticleDto $createArticleDto): ArticleDto
     {
-        // TODO: Implement createArticle() method.
+        $article = Article::query()->create([
+            'title' => $createArticleDto->title,
+            'content' => $createArticleDto->content,
+            'image_path' => $createArticleDto->imageUrl,
+            'is_published' => $createArticleDto->isPublished,
+            'author_id' => $createArticleDto->author->id
+        ]);
+
+        $author = $article->author->modelToDto();
+
+        return new ArticleDto(
+            id: $article->id,
+            title: $article->title,
+            content: $article->content,
+            isPublished: $article->is_published,
+            imageUrl: $article->image_url,
+            author: $author,
+            updatedAt: $article->updated_at,
+            createdAt: $article->created_at
+        );
+
     }
 
-    public function updateArticle(UpdateArticleDto $updateArticleDto)
+    /**
+     * @param UpdateArticleDto $updateArticleDto
+     * @return int
+     */
+    public function updateArticle(UpdateArticleDto $updateArticleDto): int
     {
-        // TODO: Implement updateArticle() method.
+        return Article::query()
+            ->where('id', $updateArticleDto->id)
+            ->update([
+                'title' => $updateArticleDto->title,
+                'content' => $updateArticleDto->content,
+                'image_path' => $updateArticleDto->imageUrl,
+                'is_published' => $updateArticleDto->isPublished,
+            ]);
     }
 
-    public function removeArticle(RemoveArticleDto $removeArticleDto)
+    /**
+     * @param RemoveArticleDto $removeArticleDto
+     * @return int
+     */
+    public function removeArticle(RemoveArticleDto $removeArticleDto): int
     {
-        // TODO: Implement removeArticle() method.
+        return Article::query()->where('id', $removeArticleDto->id)->delete();
     }
 
     /**

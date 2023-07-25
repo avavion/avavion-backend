@@ -2,9 +2,17 @@
 
 namespace App\Dto\Article;
 
+use App\Dto\User\UserDto;
+
 readonly class UpdateArticleDto
 {
-    public function __construct()
+    public function __construct(
+        public int     $id,
+        public string  $title,
+        public string  $content,
+        public bool    $isPublished,
+        public ?string $imageUrl,
+    )
     {
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Exceptions\ApiException;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,5 +33,13 @@ class RegistrationRequest extends FormRequest
             'password' => ['required', 'confirmed', 'min:6'],
             'remember' => ['sometimes', 'bool']
         ];
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function failedValidation(Validator $validator)
+    {
+        throw new ApiException($validator->errors()->first(), 400);
     }
 }

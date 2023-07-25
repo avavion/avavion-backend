@@ -48,7 +48,7 @@ readonly class AuthService implements AuthServiceContract
 
         if (!$authorized) throw new ApiException('User not found', 404);
 
-        return $user->createToken(env('TOKEN_SECRET_KEY'))->plainTextToken;
+        return $user->createToken(env('TOKEN_SECRET_KEY'), ['admin'])->plainTextToken;
     }
 
     public function login(LoginUserDto $loginUserDto): string
@@ -58,7 +58,7 @@ readonly class AuthService implements AuthServiceContract
         if (is_null($user) || !Hash::check($loginUserDto->password, $user->password))
             throw new NotFoundHttpException();
 
-        return $user->createToken(env('TOKEN_SECRET_KEY'))->plainTextToken;
+        return $user->createToken(env('TOKEN_SECRET_KEY'), ['admin'])->plainTextToken;
     }
 
     public function logout(): void
