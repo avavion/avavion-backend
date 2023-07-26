@@ -19,7 +19,7 @@ class ArticleFactory extends Factory
             'title' => $this->faker->word(),
             'content' => $this->faker->text(500),
             'is_published' => $this->faker->boolean(),
-            'image_path' => UploadedFile::fake()->image('image.png')->store('public/article'),
+            'image_path' => UploadedFile::fake()->image('image.png')->store('public/articles'),
             'author_id' => $author->id
         ];
     }
