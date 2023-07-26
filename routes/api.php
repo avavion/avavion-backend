@@ -58,7 +58,7 @@ Route::group([
     Route::middleware('auth:sanctum')->group(function (){
         Route::post('/create', 'create')->name('create');
 
-        Route::put('/{article}/update', 'update')->name('update');
+        Route::put('/{article:id}/update', 'update')->name('update');
 
         Route::delete('/{article:id}/delete', 'delete')->name('delete');
     });

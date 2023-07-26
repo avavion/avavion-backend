@@ -104,7 +104,7 @@ class ArticlesFeatureTest extends TestCase
         $article = Article::factory()->create();
 
         $response = $this->put(
-            route('articles.update', $article),
+            route('articles.update', $article->id),
             [
                 'title' => 'Заголовок',
                 'content' => 'Контентtttttttt',
