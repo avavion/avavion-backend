@@ -17,7 +17,6 @@ use App\Http\Resources\Article\PaginatedArticlesResource;
 use App\Models\Article;
 use App\Support\StorageUploadSupport;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
