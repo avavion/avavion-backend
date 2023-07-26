@@ -33,7 +33,7 @@ class ArticleController extends Controller
 
         $imageUrl = StorageUploadSupport::upload(new UploadFileDto(
             file: $request->file('image'),
-            dir: 'articles',
+            dir: 'public/articles',
         ));
 
         $response = $this->articleService->createArticle(new CreateArticleDto(
@@ -53,7 +53,7 @@ class ArticleController extends Controller
 
         $imageUrl = StorageUploadSupport::upload(new UploadFileDto(
             file: $request->file('image'),
-            dir: 'articles',
+            dir: 'public/articles',
             oldUrl: $article->image_url
         ));
 

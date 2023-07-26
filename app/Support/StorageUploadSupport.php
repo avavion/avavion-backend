@@ -17,9 +17,11 @@ class StorageUploadSupport
         if (is_null($dto->file))
             return $dto->oldUrl;
 
-        if (Storage::exists($dto->oldUrl)) {
-            Storage::delete($dto->oldUrl);
-            return $dto->file->store($dto->dir);
+        if (!is_null($dto->oldUrl)) {
+            if (Storage::exists($dto->oldUrl)){
+                Storage::delete($dto->oldUrl);
+                return $dto->file->store($dto->dir);
+            }
         }
 
         return $dto->file->store($dto->dir);

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 /**
  * App\Models\Article
  *
- * @property string $id
+ * @property int $id
  * @property string $title
  * @property string $content
  * @property bool $is_published

@@ -60,6 +60,6 @@ Route::group([
 
         Route::put('/{article}/update', 'update')->name('update');
 
-        Route::delete('/{article:id}/delete', 'update')->name('delete');
+        Route::delete('/{article:id}/delete', 'delete')->name('delete');
     });
 });
