@@ -28,7 +28,7 @@ class CreateRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'min:10'],
             'image' => ['required', 'image', 'max:10240'],
-            'isPublished' => ['nullable']
+            'isPublished' => ['required', 'boolean']
         ];
     }
 

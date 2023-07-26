@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Article;
 
 use App\Dto\Article\ArticleDto;
 use Illuminate\Http\Request;

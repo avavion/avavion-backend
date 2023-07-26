@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Project;
 
+use App\Exceptions\ApiException;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -24,5 +26,13 @@ class UpdateRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function failedValidation(Validator $validator)
+    {
+        throw new ApiException($validator->errors()->first(), 400);
     }
 }

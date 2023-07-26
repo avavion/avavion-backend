@@ -21,7 +21,7 @@ readonly class ArticleRepository implements ArticleRepositoryContract
      */
     public function getArticlesByAuthorId(string $id): array
     {
-        $articles = Article::query()->where('author_id', '=', $id)->get();
+        $articles = Article::query()->whereAuthorId($id)->get();
 
         $mapped = [];
 
@@ -58,15 +58,13 @@ readonly class ArticleRepository implements ArticleRepositoryContract
             'author_id' => $createArticleDto->author->id
         ]);
 
-        $author = $article->author->modelToDto();
-
         return new ArticleDto(
             id: $article->id,
             title: $article->title,
             content: $article->content,
             isPublished: $article->is_published,
             imageUrl: $article->image_url,
-            author: $author,
+            author: $article->author->modelToDto(),
             updatedAt: $article->updated_at,
             createdAt: $article->created_at
         );
@@ -80,7 +78,7 @@ readonly class ArticleRepository implements ArticleRepositoryContract
     public function updateArticle(UpdateArticleDto $updateArticleDto): int
     {
         return Article::query()
-            ->where('id', $updateArticleDto->id)
+            ->whereId($updateArticleDto->id)
             ->update([
                 'title' => $updateArticleDto->title,
                 'content' => $updateArticleDto->content,
@@ -95,7 +93,7 @@ readonly class ArticleRepository implements ArticleRepositoryContract
      */
     public function removeArticle(RemoveArticleDto $removeArticleDto): int
     {
-        return Article::query()->where('id', $removeArticleDto->id)->delete();
+        return Article::query()->whereId($removeArticleDto->id)->delete();
     }
 
     /**

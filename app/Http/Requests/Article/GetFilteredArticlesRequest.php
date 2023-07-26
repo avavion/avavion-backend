@@ -6,18 +6,25 @@ use App\Exceptions\ApiException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteRequest extends FormRequest
+class GetFilteredArticlesRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return $this->user()->tokenCan('admin');
-    }
-
+    /**
+     * @return array[]
+     */
     public function rules(): array
     {
         return [
-            'articleId' => ['required', 'integer', 'exists:articles,id']
+            'page' => ['sometimes', 'integer', 'min:1'],
+            'per_page' => ['sometimes', 'integer', 'max:100'],
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
     }
 
     /**
@@ -27,5 +34,4 @@ class DeleteRequest extends FormRequest
     {
         throw new ApiException($validator->errors()->first(), 400);
     }
-
 }

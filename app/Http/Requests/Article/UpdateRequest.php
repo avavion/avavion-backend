@@ -25,11 +25,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'articleId' => ['required', 'integer', 'exists:articles,id'],
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'min:10'],
             'image' => ['nullable', 'image', 'max:10240'],
-            'isPublished' => ['nullable']
+            'isPublished' => ['required', 'boolean']
         ];
     }
 
