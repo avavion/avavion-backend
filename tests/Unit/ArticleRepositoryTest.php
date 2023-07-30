@@ -13,9 +13,11 @@ class ArticleRepositoryTest extends TestCase
 {
     private ArticleRepositoryContract $articleRepository;
 
-    public function testGetAllArticlesWithPagination(): void
+    public function testGetAllArticlesWithPaginationFullSuccess(): void
     {
-        Article::factory(10)->create();
+        DB::table('articles')->truncate();
+
+        Article::factory(26)->create();
 
         $pagination = $this->articleRepository->getArticlesWithPagination(new ArticlePaginationDto(
             page: 1,
@@ -25,6 +27,36 @@ class ArticleRepositoryTest extends TestCase
         $this->assertCount(25, $pagination->articles);
         $this->assertTrue($pagination->hasNextPage);
         $this->assertEquals(1, $pagination->currentPage);
+    }
+
+    public function testGetAllArticlesWithPaginationDoesNotHasNextPage(): void
+    {
+        DB::table('articles')->truncate();
+
+        Article::factory(25)->create();
+
+        $pagination = $this->articleRepository->getArticlesWithPagination(new ArticlePaginationDto(
+            page: 1,
+            perPage: 25
+        ));
+
+        $this->assertCount(25, $pagination->articles);
+        $this->assertFalse($pagination->hasNextPage);
+        $this->assertEquals(1, $pagination->currentPage);
+    }
+
+    public function testGetAllArticlesWithPaginationDoesNotHasNextPageAndPageTwo(): void
+    {
+        Article::factory(21)->create();
+
+        $pagination = $this->articleRepository->getArticlesWithPagination(new ArticlePaginationDto(
+            page: 2,
+            perPage: 10
+        ));
+
+        $this->assertCount(10, $pagination->articles);
+        $this->assertTrue($pagination->hasNextPage);
+        $this->assertEquals(2, $pagination->currentPage);
     }
 
     protected function setUp(): void

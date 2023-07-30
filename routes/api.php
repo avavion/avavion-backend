@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProjectController;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-    'prefix' => '/v1/auth',
+    'prefix' => '/auth',
     'as' => 'auth.',
     'controller' => AuthController::class
 ], function () {
@@ -34,7 +35,7 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => '/v1/projects',
+    'prefix' => '/projects',
     'as' => 'projects.',
     'controller' => ProjectController::class
 ], function () {
@@ -45,3 +46,20 @@ Route::group([
         ->name('get.id');
 });
 
+Route::group([
+    'prefix' => '/articles',
+    'as' => 'articles.',
+    'controller' => ArticleController::class
+], function () {
+    Route::get('/get', 'getFilteredArticles')->name('get');
+
+    Route::get('/get/{article:id}', 'getArticleById')->name('get.id');
+
+    Route::middleware('auth:sanctum')->group(function (){
+        Route::post('/create', 'create')->name('create');
+
+        Route::put('/{article:id}/update', 'update')->name('update');
+
+        Route::delete('/{article:id}/delete', 'delete')->name('delete');
+    });
+});

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 class ArticleFactory extends Factory
 {
@@ -16,9 +17,9 @@ class ArticleFactory extends Factory
 
         return [
             'title' => $this->faker->word(),
-            'content' => $this->faker->word(),
+            'content' => $this->faker->text(500),
             'is_published' => $this->faker->boolean(),
-            'image_path' => $this->faker->imageUrl,
+            'image_path' => UploadedFile::fake()->image('image.png')->store('public/articles'),
             'author_id' => $author->id
         ];
     }

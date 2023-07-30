@@ -8,9 +8,9 @@ services:
         image: php:8.2-fpm
         volumes:
             - ./:/var/www
-            - ./logs/laravel:/var/www/storage/logs
+            - ./storage/logs/laravel:/var/www/storage/logs
         container_name: app
-        depends_on:
+        links:
             - db
 
     nginx:
@@ -22,7 +22,7 @@ services:
             - "80:80"
             - "443:443"
         container_name: server
-        depends_on:
+        links:
             - php
 
     db:
@@ -30,20 +30,6 @@ services:
         ports:
             - "3306:3306"
         environment:
-            MYSQL_DATABASE: "avavion"
-            MYSQL_ROOT_PASSWORD: "avavionmvm"
-        restart: always
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
         container_name: database
-
-
-
-        #  mysql:
-#    image: mysql:8.0.33
-#    tty: true
-#    ports:
-#      - "3306:3306"
-#    environment:
-#      MYSQL_DATABASE: "avavion-backend"
-#      MYSQL_ROOT_PASSWORD: "avavionmvm"
-#    networks:
-#      - app-network

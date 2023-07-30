@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Exceptions\ApiException;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,5 +29,13 @@ class LoginRequest extends FormRequest
             'email' => ['required'],
             'password' => ['required', 'min:6']
         ];
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function failedValidation(Validator $validator)
+    {
+        throw new ApiException($validator->errors()->first(), 400);
     }
 }
