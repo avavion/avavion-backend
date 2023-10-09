@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProjectController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,14 +51,20 @@ Route::group([
     'controller' => ArticleController::class
 ], function () {
     Route::get('/get', 'getFilteredArticles')->name('get');
-
     Route::get('/get/{article:id}', 'getArticleById')->name('get.id');
 
-    Route::middleware('auth:sanctum')->group(function (){
+    Route::middleware('auth:sanctum')->group(function () {
         Route::post('/create', 'create')->name('create');
-
         Route::put('/{article:id}/update', 'update')->name('update');
-
         Route::delete('/{article:id}/delete', 'delete')->name('delete');
     });
+});
+
+Route::group([
+    'preifx' => '/notifications',
+    'as' => 'notifications.',
+    'controller' => NotificationController::class,
+], function () {
+    Route::post('/telegram-webhook', 'telegramWebhook')
+        ->name('telegram-webhook');
 });

@@ -19,8 +19,7 @@ readonly class AuthService implements AuthServiceContract
 {
     public function __construct(
         private UserRepositoryContract $userRepository
-    )
-    {
+    ) {
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Contracts\Services;
 
-use App\Dto\Auth\AuthUserDto;
 use App\Dto\Auth\LoginUserDto;
 use App\Dto\Auth\RegistrationUserDto;
 
